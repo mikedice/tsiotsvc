@@ -1,0 +1,19 @@
+FROM node:14-alpine
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY dist dist
+COPY localenv.sh .
+COPY runlocal.sh .
+
+# These files are not used in production
+RUN rm /usr/src/app/localenv.sh
+RUN rm /usr/src/app/runlocal.sh
+
+CMD ["node", "dist/app.js"]
+
+

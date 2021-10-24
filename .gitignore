@@ -1,0 +1,4 @@
+localenv.sh
+node_modules
+dist
+.debuggerenv
