@@ -6,15 +6,13 @@ COPY package*.json ./
 
 RUN npm install
 
-# These variables are used by DfaultIdentityProvider. Only non-production
-# credentials should be stored and accessed this way
 COPY dist dist
-COPY localenv.sh .
-COPY runlocal.sh .
 
-run chmod +x /usr/src/app/localenv.sh
-run chmod +x /usr/src/app/runlocal.sh
-
-CMD ["/usr/src/app/runlocal.sh"]
+# These variables are used by DefaultIdentityProvider. Only non-production
+# credentials should be stored and accessed this way
+ENV AZURE_TENANT_ID=<redacted>
+ENV AZURE_CLIENT_ID=<redacted>
+ENV AZURE_CLIENT_SECRET=<redacted>
+CMD ["node", "/usr/src/app/dist/app.js"]
 
 
